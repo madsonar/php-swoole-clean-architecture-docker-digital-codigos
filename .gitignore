@@ -1,0 +1,16 @@
+/vendor/
+/.phpunit.cache/
+/node_modules/
+
+# Arquivos de configuração local
+/.env
+/.env.local
+
+# Diretórios de cache e logs
+/var/
+/log/
+
+# Arquivos e diretórios específicos do sistema operacional e do editor
+.DS_Store
+Thumbs.db
+.idea/

@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+
+  php-swoole:
+    image: php-swoole
+    hostname: php-swoole
+    container_name: php-swoole
+    build:
+      context: ./
+      dockerfile: ./.docker/php/Dockerfile
+      args:
+        USER: ${USER}
+        UID: ${UID}
+        GID: ${GID}
+    ports:
+      - "8090:80"
+    volumes:
+      - ./:/var/www/
+      - ./.docker/php/ini/php.ini:/usr/local/etc/php/php.ini
+      - ./.docker/php/ini/docker-php-ext-openswoole.ini:/usr/local/etc/php/conf.d/docker-php-ext-openswoole.ini
+    command: ["php", "/var/www/app/swoole/server.php"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - network-digital-codigos
+
+networks:
+  network-digital-codigos:
+    driver: bridge
+    external: false
+    name: network-digital-codigos
